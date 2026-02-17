@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 AI Brain Bot
+# 🧠 SuperMemory Bot
 
 ### Your Personal AI Companion with Persistent Memory
 
@@ -18,7 +18,7 @@
 
 ## ✨ Features
 
-AI Brain Bot is a Discord-based AI companion that **actually remembers you**. Unlike standard chatbots that forget everything between sessions, this bot builds a persistent understanding of who you are, what you care about, and what's happening in your life.
+SuperMemory Bot is a Discord-based AI companion that **actually remembers you**. Unlike standard chatbots that forget everything between sessions, this bot builds a persistent understanding of who you are, what you care about, and what's happening in your life.
 
 ### 🧠 Persistent Memory System
 - **Vector-based memory** powered by [Mem0](https://github.com/mem0ai/mem0) + [ChromaDB](https://www.trychroma.com/)
@@ -44,20 +44,27 @@ AI Brain Bot is a Discord-based AI companion that **actually remembers you**. Un
 
 ### 🎭 Emotion Analysis
 - Understands emotional context in conversations
-- Adjusts response tone accordingly
+- Adjusts response tone accordingly (late-night mode, stressed mode, etc.)
 
 ### 🔍 Web Search & Archive Search
-- Real-time web search integration
-- Search through your own conversation history
+- Real-time web search via Z.AI MCP or DuckDuckGo (auto-fallback)
+- Full-text search through your own conversation history
+- Smart trigger detection (keywords like "搜索", "最新", URLs, etc.)
 
 ### 📅 Event Scheduling
 - Discord-integrated reminders and event tracking
+- Natural language time parsing ("明天下午3点", "周五")
+- Recurring event support
+
+### 🎤 Voice Message Support
+- Automatic voice message transcription via Gemini
+- Supports multiple audio formats (OGG, MP3, WAV, M4A, FLAC)
 
 ---
 
 ## ✨ 功能特性
 
-AI Brain Bot 是一个基于 Discord 的 AI 伙伴，**真正能记住你**。不同于标准聊天机器人在每次对话后就遗忘一切，这个机器人会持续积累对你的了解——你是谁、你关心什么、你生活中发生了什么。
+SuperMemory Bot 是一个基于 Discord 的 AI 伙伴，**真正能记住你**。不同于标准聊天机器人在每次对话后就遗忘一切，这个机器人会持续积累对你的了解——你是谁、你关心什么、你生活中发生了什么。
 
 ### 🧠 持久记忆系统
 - 基于 [Mem0](https://github.com/mem0ai/mem0) + [ChromaDB](https://www.trychroma.com/) 的**向量记忆**
@@ -83,21 +90,28 @@ AI Brain Bot 是一个基于 Discord 的 AI 伙伴，**真正能记住你**。�
 
 ### 🎭 情绪分析
 - 理解对话中的情绪语境
-- 相应调整回复语气
+- 相应调整回复语气（深夜模式、压力模式等）
 
 ### 🔍 网络搜索 & 历史搜索
-- 实时网络搜索集成
-- 搜索你自己的对话历史
+- 通过 Z.AI MCP 或 DuckDuckGo 实时搜索（自动降级）
+- 全文搜索你自己的对话历史
+- 智能触发检测（"搜索"、"最新"、URL 等关键词）
 
 ### 📅 事件提醒
 - Discord 集成的提醒和事件追踪
+- 自然语言时间解析（"明天下午3点"、"周五"）
+- 循环事件支持
+
+### 🎤 语音消息支持
+- 通过 Gemini 自动转录语音消息
+- 支持多种音频格式（OGG、MP3、WAV、M4A、FLAC）
 
 ---
 
 ## 🏗 Architecture / 架构
 
 ```
-brain_bot/
+SuperMemory-Bot/
 ├── main.py                  # Entry point / 入口
 ├── soul.md                  # AI personality (auto-created) / AI 人格定义
 ├── soul.example.md          # Personality template / 人格模板
@@ -132,21 +146,138 @@ brain_bot/
 
 ---
 
+## � LLM Configuration / 大语言模型配置
+
+SuperMemory Bot uses [LiteLLM](https://github.com/BerriAI/litellm) as its LLM router, supporting **100+ models** from various providers. There are two main access modes:
+
+SuperMemory Bot 使用 [LiteLLM](https://github.com/BerriAI/litellm) 作为 LLM 路由，支持来自各种供应商的 **100+ 模型**。有两种主要的访问方式：
+
+### Mode A: Antigravity Proxy (Recommended / 推荐)
+
+[Antigravity Claude Proxy](https://www.npmjs.com/package/antigravity-claude-proxy) is a local reverse proxy that provides **free access** to Claude and Gemini models. It runs on `localhost:8080` and translates requests through Anthropic's compatible API format.
+
+[Antigravity Claude Proxy](https://www.npmjs.com/package/antigravity-claude-proxy) 是一个本地反向代理，提供 **免费访问** Claude 和 Gemini 模型的能力。它运行在 `localhost:8080`，通过 Anthropic 兼容的 API 格式转发请求。
+
+**How it works / 工作原理:**
+
+```
+Discord Bot → Gateway → LiteLLM → Antigravity Proxy (localhost:8080) → Claude/Gemini
+```
+
+1. The Gateway checks if `ANTIGRAVITY_PROXY_ENABLED=true`
+2. For Claude/Gemini models, it routes through the proxy by setting `api_base` to `localhost:8080`
+3. The proxy handles authentication — **no API key needed on your end**
+
+Gateway 检查 `ANTIGRAVITY_PROXY_ENABLED=true`，对于 Claude/Gemini 模型，它通过设置 `api_base` 为 `localhost:8080` 将请求路由到代理。代理处理认证——**你不需要 API 密钥**。
+
+**Supported proxy models / 代理支持的模型:**
+- `claude-sonnet-*` / `claude-opus-*` / `claude-haiku-*`
+- `gemini-2*` / `gemini-3*`
+
+**Setup / 设置:**
+
+```bash
+# Install Node.js if not installed / 如果未安装 Node.js
+# https://nodejs.org/
+
+# The start.sh script auto-starts the proxy / start.sh 脚本会自动启动代理
+./start.sh
+
+# Or start manually / 或手动启动
+npx -y antigravity-claude-proxy@latest start
+```
+
+**.env config / 环境变量配置:**
+
+```ini
+ANTIGRAVITY_PROXY_ENABLED=true
+ANTIGRAVITY_PROXY_URL=http://localhost:8080
+DEFAULT_MODEL=anthropic/claude-opus-4-6-thinking
+```
+
+### Mode B: Direct API Keys / 直接 API 密钥
+
+If you have your own API keys, you can use them directly without the proxy. LiteLLM will route requests to the provider's official endpoint.
+
+如果你有自己的 API 密钥，可以直接使用，不需要代理。LiteLLM 会将请求路由到供应商的官方端点。
+
+**How it works / 工作原理:**
+
+```
+Discord Bot → Gateway → LiteLLM → Provider API (Anthropic / OpenAI / Google / Ollama)
+```
+
+**.env config / 环境变量配置:**
+
+```ini
+# Disable proxy / 禁用代理
+ANTIGRAVITY_PROXY_ENABLED=false
+
+# Anthropic (Claude)
+ANTHROPIC_API_KEY=sk-ant-api03-...
+DEFAULT_MODEL=anthropic/claude-sonnet-4-5
+
+# Or OpenAI (GPT)
+OPENAI_API_KEY=sk-...
+DEFAULT_MODEL=gpt-4o
+
+# Or Google Gemini
+GEMINI_API_KEY=AIza...
+DEFAULT_MODEL=gemini/gemini-2.5-pro
+
+# Or Ollama (local, 本地)
+DEFAULT_MODEL=ollama/llama3
+```
+
+### Model Routing Logic / 模型路由逻辑
+
+The Gateway's `_prepare_completion_kwargs` method decides how to route each LLM call:
+
+Gateway 的 `_prepare_completion_kwargs` 方法决定每个 LLM 调用的路由方式：
+
+| Condition / 条件 | Route / 路由 |
+|---|---|
+| `ANTIGRAVITY_PROXY_ENABLED=true` + model contains `claude-*` or `gemini-*` | → Antigravity Proxy (`localhost:8080`) |
+| `ANTIGRAVITY_PROXY_ENABLED=false` or model not Claude/Gemini | → Direct API via LiteLLM |
+
+**Multiple models are used internally / 内部使用多个模型：**
+
+| Purpose / 用途 | Default Model / 默认模型 | Config Variable / 配置变量 |
+|---|---|---|
+| Main conversation / 主对话 | `claude-opus-4-6-thinking` | `DEFAULT_MODEL` |
+| Memory extraction / 记忆提取 | `gemini-3-flash` | Hardcoded in `gateway.py` |
+| Voice transcription / 语音转录 | `gemini-3-flash` | `VOICE_TRANSCRIBE_MODEL` |
+| Soul summary sync / 灵魂总结同步 | Same as main model / 与主模型相同 | — |
+| Diary generation / 日记生成 | Same as main model / 与主模型相同 | — |
+
+### Switching Models at Runtime / 运行时切换模型
+
+Use the `/model` Discord command to switch models without restarting:
+
+使用 `/model` Discord 命令无需重启即可切换模型：
+
+```
+/model opus          → anthropic/claude-opus-4-6-thinking
+/model sonnet        → anthropic/claude-sonnet-4-5
+/model gemini-pro    → anthropic/gemini-3-pro-high
+/model gemini-flash  → anthropic/gemini-2.5-flash
+```
+
+---
+
 ## 🚀 Quick Start / 快速开始
 
 ### Prerequisites / 前提条件
 
 - **Python 3.10+**
+- **Node.js 18+** (for Antigravity Proxy / 用于 Antigravity 代理)
 - **Discord Bot Token** — [Create one here / 在这里创建](https://discord.com/developers/applications)
-- **LLM API Access** — One of:
-  - Direct API keys (OpenAI / Anthropic / Google Gemini)
-  - [Antigravity Proxy](https://github.com/antigravityinc) (recommended for Claude/Gemini)
 
 ### 1. Clone the Repository / 克隆仓库
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/brain_bot.git
-cd brain_bot
+git clone https://github.com/sgaofen/SuperMemory-Bot.git
+cd SuperMemory-Bot
 ```
 
 ### 2. Create Virtual Environment / 创建虚拟环境
@@ -171,25 +302,18 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edit `.env` with your settings:
-编辑 `.env` 填入你的配置：
+Edit `.env` with your settings (see [LLM Configuration](#-llm-configuration--大语言模型配置) above for model setup):
+
+编辑 `.env` 填入你的配置（模型设置请参考上方 [大语言模型配置](#-llm-configuration--大语言模型配置)）：
 
 ```ini
 # Required / 必填
 DISCORD_BOT_TOKEN=your_discord_bot_token_here
 
-# Choose one LLM access method / 选择一种 LLM 访问方式：
-
-# Option A: Direct API key / 方式 A：直接 API 密钥
-ANTHROPIC_API_KEY=sk-ant-...
-# or / 或
-OPENAI_API_KEY=sk-...
-# or / 或
-GEMINI_API_KEY=...
-
-# Option B: Antigravity Proxy (recommended) / 方式 B：反代代理（推荐）
+# LLM Access (see above) / LLM 访问方式（见上方）
 ANTIGRAVITY_PROXY_ENABLED=true
 ANTIGRAVITY_PROXY_URL=http://localhost:8080
+DEFAULT_MODEL=anthropic/claude-opus-4-6-thinking
 
 # Personalization / 个性化
 BOT_USER_ID=your_name          # Your identifier / 你的标识
@@ -214,14 +338,18 @@ USER_TIMEZONE=America/Los_Angeles  # Your timezone / 你的时区
 ### 6. Run / 运行
 
 ```bash
-# Simple start / 简单启动
-python main.py
-
-# Or use the service script (with proxy) / 或使用服务脚本（含代理）
+# Recommended: use the service script (auto-starts proxy + bot)
+# 推荐：使用服务脚本（自动启动代理 + 机器人）
 chmod +x start.sh stop.sh
 ./start.sh
 
-# Stop / 停止
+# Or start manually / 或手动启动：
+# Terminal 1: Start proxy / 终端 1：启动代理
+npx -y antigravity-claude-proxy@latest start
+# Terminal 2: Start bot / 终端 2：启动机器人
+python main.py
+
+# Stop everything / 停止所有服务
 ./stop.sh
 ```
 
@@ -239,13 +367,26 @@ chmod +x start.sh stop.sh
 | `BOT_NAME` | `AI` | The AI companion's display name |
 | `USER_TIMEZONE` | `America/Los_Angeles` | Your local timezone |
 
+### LLM Proxy Settings / LLM 代理设置
+
+| Variable | Default | Description |
+|---|---|---|
+| `ANTIGRAVITY_PROXY_ENABLED` | `false` | Enable Antigravity reverse proxy / 启用反代 |
+| `ANTIGRAVITY_PROXY_URL` | `http://localhost:8080` | Proxy URL |
+| `ANTHROPIC_API_KEY` | — | Direct Anthropic API key (if no proxy) |
+| `OPENAI_API_KEY` | — | Direct OpenAI API key (if no proxy) |
+| `GEMINI_API_KEY` | — | Direct Google Gemini API key (if no proxy) |
+| `MAX_OUTPUT_TOKENS` | `4096` | Max tokens per LLM response |
+
 ### Memory Tuning / 记忆调优
 
 | Variable | Default | Description |
 |---|---|---|
 | `MEMORY_RETRIEVAL_LIMIT` | `120` | Memories retrieved per query |
 | `MEMORY_TOKEN_BUDGET` | `18000` | Token budget for memory context |
+| `HISTORY_TOKEN_BUDGET` | `120000` | Token budget for conversation history |
 | `SYSTEM_PROMPT_TOKEN_BUDGET` | `30000` | Total system prompt budget |
+| `TOTAL_CONTEXT_TOKEN_BUDGET` | `160000` | Total context window budget |
 | `SOUL_PROMPT_MAX_CHARS` | `12000` | Max chars from soul.md in prompt |
 | `MEMORY_DUPLICATE_SCORE` | `0.92` | Similarity threshold for dedup |
 | `MEM0_INFER` | `false` | Let Mem0 rewrite/merge memories |
@@ -260,6 +401,16 @@ chmod +x start.sh stop.sh
 | `DIARY_AUTO_GENERATE_AFTER_MESSAGES` | `30` | Trigger after N messages |
 | `DIARY_VIEWER_PORT` | `8888` | Web viewer port |
 
+### Web Search / 网络搜索
+
+| Variable | Default | Description |
+|---|---|---|
+| `WEB_SEARCH_ENABLED` | `true` | Enable web search feature |
+| `WEB_SEARCH_ENGINE` | `auto` | Engine: `auto` / `zai` / `duckduckgo` |
+| `ZAI_API_KEY` | — | Z.AI API key (for premium search) |
+| `WEB_SEARCH_MAX_RESULTS` | `8` | Max results per search |
+| `WEB_SEARCH_TIMEOUT_SEC` | `12` | Search timeout |
+
 ### Special Person Tracking / 特别关注
 
 | Variable | Default | Description |
@@ -267,18 +418,55 @@ chmod +x start.sh stop.sh
 | `SPECIAL_PERSON_NAME` | _(empty)_ | Name to track specially |
 | `SPECIAL_PERSON_LABEL` | `Special Person` | Display label for this person |
 
+### Enhanced Features / 增强功能
+
+| Variable | Default | Description |
+|---|---|---|
+| `USE_ENHANCED_GATEWAY` | `true` | Enable enhanced gateway (diary, events, followup, emotion) |
+| `VOICE_AUTO_TRANSCRIBE` | `true` | Auto-transcribe voice messages |
+| `VOICE_TRANSCRIBE_MODEL` | `gemini-3-flash` | Model for voice transcription |
+| `SOUL_EVOLUTION_ENABLED` | `true` | Enable proactive soul personality evolution |
+
 ---
 
 ## 🤖 Discord Commands / Discord 命令
 
+### Core Commands / 基础命令
+
 | Command | Description |
 |---|---|
+| `@Bot <message>` | Talk to the bot (mention in server) / 与机器人对话（在服务器中 @提及） |
+| DM the bot | Talk in DMs (no mention needed) / 私信对话（无需 @提及） |
 | `/remember <text>` | Manually save a memory / 手动保存记忆 |
 | `/recall <query>` | Search your memories / 搜索记忆 |
-| `/soul` | View/manage personality file / 查看/管理人格文件 |
-| `/diary [date]` | View diary entry / 查看日记 |
-| `/events` | View upcoming events / 查看事件 |
-| `/followup` | View tracked topics / 查看跟进话题 |
+| `/forget <id>` | Delete a specific memory / 删除指定记忆 |
+| `/correct <id> <text>` | Correct a memory / 纠正一条记忆 |
+| `/whoami` | View your memory profile / 查看记忆档案 |
+| `/model <name>` | Switch LLM model / 切换模型 |
+| `/clear` | Clear conversation history / 清除对话历史 |
+
+### Advanced Commands / 高级命令
+
+| Command | Description |
+|---|---|
+| `/soul [view\|refresh]` | View or refresh personality file / 查看/刷新人格文件 |
+| `/status` | View context window usage / 查看上下文窗口使用情况 |
+| `/compact` | Compress conversation history / 压缩对话历史 |
+| `/memory_health` | View memory database health / 查看记忆库健康状态 |
+| `/repair_memory` | Repair vector store from backup / 从备份修复向量库 |
+
+### Enhanced Gateway Commands / 增强功能命令
+
+| Command | Description |
+|---|---|
+| `/remind <title> <when>` | Create a reminder / 创建提醒 |
+| `/reminders` | View all reminders / 查看所有提醒 |
+| `/complete_reminder <id>` | Complete a reminder / 完成提醒 |
+| `/followups` | View tracked follow-up topics / 查看跟进话题 |
+| `/complete_followup <id>` | Complete a follow-up topic / 完成跟进话题 |
+| `/emotion` | View emotion state & trend / 查看情绪状态和趋势 |
+| `/session` | View session state / 查看会话状态 |
+| `/diary [action] [date]` | Generate or view diary / 生成或查看日记 |
 
 ---
 
