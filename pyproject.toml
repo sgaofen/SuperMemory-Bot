@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "ai-brain"
+version = "0.1.0"
+description = "Personal AI Brain — persistent memory, unified LLM gateway, Discord interface"
+requires-python = ">=3.9"
+dependencies = [
+    "mem0ai>=0.1.0",
+    "litellm>=1.30.0",
+    "discord.py>=2.3.0",
+    "chromadb>=0.4.0",
+    "python-dotenv>=1.0.0",
+    "openai>=1.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+ai-brain = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

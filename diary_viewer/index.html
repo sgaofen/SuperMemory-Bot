@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📔 我的日记本</title>
+    <meta name="description" content="AI 自动生成的私人日记本">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">📔 日记本</h1>
+                <button class="theme-toggle" id="themeToggle" title="切换深色模式">🌙</button>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 搜索日记..." autocomplete="off">
+            </div>
+
+            <!-- Calendar -->
+            <div class="calendar" id="calendar">
+                <div class="calendar-nav">
+                    <button class="cal-nav-btn" id="prevMonth">‹</button>
+                    <span class="cal-title" id="calTitle">2026年2月</span>
+                    <button class="cal-nav-btn" id="nextMonth">›</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="cal-header">日</div>
+                    <div class="cal-header">一</div>
+                    <div class="cal-header">二</div>
+                    <div class="cal-header">三</div>
+                    <div class="cal-header">四</div>
+                    <div class="cal-header">五</div>
+                    <div class="cal-header">六</div>
+                </div>
+                <div class="calendar-days" id="calDays"></div>
+            </div>
+
+            <!-- Diary List -->
+            <div class="diary-list" id="diaryList">
+                <div class="list-header">最近日记</div>
+                <!-- Dynamically populated -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content" id="content">
+            <div class="content-inner">
+                <!-- Welcome screen -->
+                <div class="welcome" id="welcome">
+                    <div class="welcome-icon">📖</div>
+                    <h2>欢迎来到你的日记本</h2>
+                    <p>从左侧日历选择一个日期，或点击日记列表查看</p>
+                    <div class="welcome-stats" id="welcomeStats"></div>
+                </div>
+
+                <!-- Diary display -->
+                <article class="diary-article" id="diaryArticle" style="display:none;">
+                    <div class="diary-content" id="diaryContent"></div>
+                </article>
+
+                <!-- No diary for this date -->
+                <div class="no-diary" id="noDiary" style="display:none;">
+                    <div class="no-diary-icon">🌙</div>
+                    <h3>这一天没有日记</h3>
+                    <p id="noDiaryDate"></p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Mobile sidebar toggle -->
+        <button class="mobile-toggle" id="mobileToggle">☰</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
