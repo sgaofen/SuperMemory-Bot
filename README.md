@@ -265,7 +265,36 @@ Use the `/model` Discord command to switch models without restarting:
 
 ---
 
-## 🚀 Quick Start / 快速开始
+## 🚀 One-Click Setup / 一键安装
+
+The fastest way to get started — run the interactive setup wizard:
+
+最快的上手方式 — 运行交互式安装向导：
+
+```bash
+git clone https://github.com/sgaofen/SuperMemory-Bot.git
+cd SuperMemory-Bot
+chmod +x setup.sh
+./setup.sh
+```
+
+The wizard will:
+- ✅ Check prerequisites (Python, Node.js)
+- ✅ Create virtual environment & install dependencies
+- ✅ Guide you through Discord bot token setup
+- ✅ Let you choose LLM mode (Antigravity Proxy / Direct API / Ollama)
+- ✅ Personalize your AI (name, timezone, language)
+- ✅ Generate `.env` and `soul.md` automatically
+- ✅ Offer to start the bot immediately
+
+向导会自动完成：检查环境、安装依赖、引导配置 Discord 令牌、选择模型访问方式、个性化 AI、生成配置文件，并可以直接启动。
+
+---
+
+## 📖 Manual Setup / 手动安装
+
+<details>
+<summary>Click to expand manual setup steps / 点击展开手动安装步骤</summary>
 
 ### Prerequisites / 前提条件
 
@@ -352,6 +381,8 @@ python main.py
 # Stop everything / 停止所有服务
 ./stop.sh
 ```
+
+</details>
 
 ---
 
