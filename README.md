@@ -2,17 +2,37 @@
 
 # 🧠 SuperMemory Bot
 
-### Your Personal AI Companion with Persistent Memory
+### The AI That Remembers *Everything* — Not Just Summaries
 
-**一个拥有持久记忆的 AI 私人伙伴**
+**真正记住你每一个细节的 AI —— 不只是摘要**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Discord.py](https://img.shields.io/badge/discord.py-2.3+-7289da.svg)](https://discordpy.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[English](#-features) · [中文](#-功能特性)
+[English](#-why-supermemory) · [中文](#-为什么选择-supermemory)
 
 </div>
+
+---
+
+## 💡 Why SuperMemory? / 为什么选择 SuperMemory？
+
+Most "memory-enabled" AI chatbots on the market today only store **summaries** or **key facts** — they compress your conversations into a few bullet points and lose everything else. When you mention a small detail from weeks ago, they draw a blank.
+
+**SuperMemory is fundamentally different.** It stores **every single detail** from your conversations in a vector database — every preference, every plan, every offhand comment, every emotion. Nothing gets thrown away.
+
+市面上大多数所谓的"记忆" AI 聊天机器人只保存**摘要**或**关键事实** —— 它们把你的对话压缩成几个要点，其余的全都丢失了。当你提起几周前的一个小细节时，它们一脸茫然。
+
+**SuperMemory 从根本上不同。** 它把你对话中的**每一个细节**都保存在向量数据库里 —— 每一个偏好、每一个计划、每一句随口说的话、每一次情绪变化。没有任何信息会被丢弃。
+
+| | Typical "Memory" AI | SuperMemory Bot |
+|---|---|---|
+| Storage | Summaries, key facts only | **Every detail, raw + structured** |
+| Recall | Recent topics only | **Anything you've ever said** |
+| Detail level | "User likes coffee" | **"User prefers oat milk latte from Blue Bottle, especially on rainy days"** |
+| Over time | Overwrites old memories | **Accumulates & cross-references** |
+| Privacy | Cloud-stored | **100% local on your machine** |
 
 ---
 
@@ -36,6 +56,11 @@ SuperMemory Bot is a Discord-based AI companion that **actually remembers you**.
 - Beautiful narrative-style entries with literary flair
 - Web viewer with calendar navigation and dark mode
 - Auto-triggers based on time or message count
+
+<div align="center">
+<img src="docs/images/diary_viewer.png" alt="AI Diary Viewer — 日记查看器" width="700" />
+<p><em>Built-in diary viewer with calendar navigation and dark mode / 内置日记查看器，支持日历导航和暗黑模式</em></p>
+</div>
 
 ### 🎯 Smart Follow-ups
 - Detects plans, goals, and commitments from your messages
