@@ -1,12 +1,12 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "ai-brain"
 version = "0.1.0"
 description = "Personal AI Brain — persistent memory, unified LLM gateway, Discord interface"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "mem0ai>=0.1.0",
     "litellm>=1.30.0",

@@ -67,10 +67,10 @@ DIARY_PROMPT = f"""\
 - 不要输出多余的说明或元信息
 
 ## 今天的日期
-{date_str}
+{{date_str}}
 
 ## 今天的对话记录
-{conversations}
+{{conversations}}
 """
 
 DIARY_PROMPT_NO_DATA = f"""\
