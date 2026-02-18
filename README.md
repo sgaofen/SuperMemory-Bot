@@ -319,16 +319,14 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-The wizard will:
-- ✅ Check prerequisites (Python, Node.js)
-- ✅ Create virtual environment & install dependencies
-- ✅ Guide you through Discord bot token setup
-- ✅ Let you choose LLM mode (Antigravity Proxy / Direct API / Ollama)
-- ✅ Personalize your AI (name, timezone, language)
-- ✅ Generate `.env` and `soul.md` automatically
-- ✅ Offer to start the bot immediately
-
-向导会自动完成：检查环境、安装依赖、引导配置 Discord 令牌、选择模型访问方式、个性化 AI、生成配置文件，并可以直接启动。
+The wizard will / 向导会自动完成：
+- ✅ Check prerequisites (Python, Node.js) / 检查环境依赖
+- ✅ Create virtual environment & install dependencies / 创建虚拟环境并安装依赖
+- ✅ Guide you through Discord bot token setup / 引导配置 Discord 机器人令牌
+- ✅ Let you choose LLM mode (Antigravity Proxy / Direct API / Ollama) / 选择模型访问方式
+- ✅ Personalize your AI (name, timezone, language) / 个性化你的 AI（名称、时区、语言）
+- ✅ Generate `.env` and `soul.md` automatically / 自动生成配置文件
+- ✅ Offer to start the bot immediately / 可选择立即启动
 
 ---
 
@@ -393,17 +391,11 @@ USER_TIMEZONE=America/Los_Angeles  # Your timezone / 你的时区
 
 ### 5. Discord Bot Setup / Discord 机器人设置
 
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Create a new application → Bot
-3. Enable **Message Content Intent** under Privileged Gateway Intents
-4. Generate an invite URL with `bot` + `applications.commands` scopes
-5. Invite the bot to your server
-
-前往 [Discord 开发者门户](https://discord.com/developers/applications)：
-1. 创建新应用 → Bot
-2. 启用 **Message Content Intent**（特权网关意图中）
-3. 生成包含 `bot` + `applications.commands` 权限的邀请链接
-4. 将机器人邀请到你的服务器
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications) / 前往 [Discord 开发者门户](https://discord.com/developers/applications)
+2. Create a new application → Bot / 创建新应用 → Bot
+3. Enable **Message Content Intent** under Privileged Gateway Intents / 启用 **Message Content Intent**（特权网关意图中）
+4. Generate an invite URL with `bot` + `applications.commands` scopes / 生成包含 `bot` + `applications.commands` 权限的邀请链接
+5. Invite the bot to your server / 将机器人邀请到你的服务器
 
 ### 6. Run / 运行
 
@@ -431,73 +423,73 @@ python main.py
 
 ### Core Settings / 核心设置
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `DISCORD_BOT_TOKEN` | — | **Required.** Discord bot token |
-| `DEFAULT_MODEL` | `claude-opus-4-6-thinking` | LLM model to use |
-| `BOT_USER_ID` | `user` | Your identifier in the memory system |
-| `BOT_NAME` | `AI` | The AI companion's display name |
-| `USER_TIMEZONE` | `America/Los_Angeles` | Your local timezone |
+| `DISCORD_BOT_TOKEN` | — | **Required.** Discord bot token / **必填。** Discord 机器人令牌 |
+| `DEFAULT_MODEL` | `claude-opus-4-6-thinking` | LLM model to use / 使用的 LLM 模型 |
+| `BOT_USER_ID` | `user` | Your identifier in the memory system / 你在记忆系统中的标识 |
+| `BOT_NAME` | `AI` | The AI companion's display name / AI 伙伴的显示名称 |
+| `USER_TIMEZONE` | `America/Los_Angeles` | Your local timezone / 你的本地时区 |
 
 ### LLM Proxy Settings / LLM 代理设置
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `ANTIGRAVITY_PROXY_ENABLED` | `false` | Enable Antigravity reverse proxy / 启用反代 |
-| `ANTIGRAVITY_PROXY_URL` | `http://localhost:8080` | Proxy URL |
-| `ANTHROPIC_API_KEY` | — | Direct Anthropic API key (if no proxy) |
-| `OPENAI_API_KEY` | — | Direct OpenAI API key (if no proxy) |
-| `GEMINI_API_KEY` | — | Direct Google Gemini API key (if no proxy) |
-| `MAX_OUTPUT_TOKENS` | `4096` | Max tokens per LLM response |
+| `ANTIGRAVITY_PROXY_ENABLED` | `false` | Enable Antigravity reverse proxy / 启用 Antigravity 反向代理 |
+| `ANTIGRAVITY_PROXY_URL` | `http://localhost:8080` | Proxy URL / 代理地址 |
+| `ANTHROPIC_API_KEY` | — | Direct Anthropic API key (if no proxy) / 直接 Anthropic API 密钥（不用代理时） |
+| `OPENAI_API_KEY` | — | Direct OpenAI API key (if no proxy) / 直接 OpenAI API 密钥（不用代理时） |
+| `GEMINI_API_KEY` | — | Direct Google Gemini API key (if no proxy) / 直接 Gemini API 密钥（不用代理时） |
+| `MAX_OUTPUT_TOKENS` | `4096` | Max tokens per LLM response / 每次 LLM 回复的最大 token 数 |
 
 ### Memory Tuning / 记忆调优
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `MEMORY_RETRIEVAL_LIMIT` | `120` | Memories retrieved per query |
-| `MEMORY_TOKEN_BUDGET` | `18000` | Token budget for memory context |
-| `HISTORY_TOKEN_BUDGET` | `120000` | Token budget for conversation history |
-| `SYSTEM_PROMPT_TOKEN_BUDGET` | `30000` | Total system prompt budget |
-| `TOTAL_CONTEXT_TOKEN_BUDGET` | `160000` | Total context window budget |
-| `SOUL_PROMPT_MAX_CHARS` | `12000` | Max chars from soul.md in prompt |
-| `MEMORY_DUPLICATE_SCORE` | `0.92` | Similarity threshold for dedup |
-| `MEM0_INFER` | `false` | Let Mem0 rewrite/merge memories |
+| `MEMORY_RETRIEVAL_LIMIT` | `120` | Memories retrieved per query / 每次查询检索的记忆条数 |
+| `MEMORY_TOKEN_BUDGET` | `18000` | Token budget for memory context / 记忆上下文的 token 预算 |
+| `HISTORY_TOKEN_BUDGET` | `120000` | Token budget for conversation history / 对话历史的 token 预算 |
+| `SYSTEM_PROMPT_TOKEN_BUDGET` | `30000` | Total system prompt budget / 系统提示的 token 预算 |
+| `TOTAL_CONTEXT_TOKEN_BUDGET` | `160000` | Total context window budget / 总上下文窗口预算 |
+| `SOUL_PROMPT_MAX_CHARS` | `12000` | Max chars from soul.md in prompt / soul.md 在提示中的最大字符数 |
+| `MEMORY_DUPLICATE_SCORE` | `0.92` | Similarity threshold for dedup / 去重的相似度阈值 |
+| `MEM0_INFER` | `false` | Let Mem0 rewrite/merge memories / 允许 Mem0 改写/合并记忆 |
 
 ### Diary / 日记
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `DIARY_ENABLED` | `true` | Enable diary feature |
-| `DIARY_AUTO_GENERATE` | `true` | Auto-generate daily diary |
-| `DIARY_AUTO_GENERATE_TIME` | `23:30` | Auto-generation time |
-| `DIARY_AUTO_GENERATE_AFTER_MESSAGES` | `30` | Trigger after N messages |
-| `DIARY_VIEWER_PORT` | `8888` | Web viewer port |
+| `DIARY_ENABLED` | `true` | Enable diary feature / 启用日记功能 |
+| `DIARY_AUTO_GENERATE` | `true` | Auto-generate daily diary / 自动生成每日日记 |
+| `DIARY_AUTO_GENERATE_TIME` | `23:30` | Auto-generation time / 自动生成时间 |
+| `DIARY_AUTO_GENERATE_AFTER_MESSAGES` | `30` | Trigger after N messages / N 条消息后触发 |
+| `DIARY_VIEWER_PORT` | `8888` | Web viewer port / 网页查看器端口 |
 
 ### Web Search / 网络搜索
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `WEB_SEARCH_ENABLED` | `true` | Enable web search feature |
-| `WEB_SEARCH_ENGINE` | `auto` | Engine: `auto` / `zai` / `duckduckgo` |
-| `ZAI_API_KEY` | — | Z.AI API key (for premium search) |
-| `WEB_SEARCH_MAX_RESULTS` | `8` | Max results per search |
-| `WEB_SEARCH_TIMEOUT_SEC` | `12` | Search timeout |
+| `WEB_SEARCH_ENABLED` | `true` | Enable web search feature / 启用网络搜索功能 |
+| `WEB_SEARCH_ENGINE` | `auto` | Engine: `auto` / `zai` / `duckduckgo` / 搜索引擎 |
+| `ZAI_API_KEY` | — | Z.AI API key (for premium search) / Z.AI API 密钥（高级搜索） |
+| `WEB_SEARCH_MAX_RESULTS` | `8` | Max results per search / 每次搜索最大结果数 |
+| `WEB_SEARCH_TIMEOUT_SEC` | `12` | Search timeout / 搜索超时时间 |
 
 ### Special Person Tracking / 特别关注
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `SPECIAL_PERSON_NAME` | _(empty)_ | Name to track specially |
-| `SPECIAL_PERSON_LABEL` | `Special Person` | Display label for this person |
+| `SPECIAL_PERSON_NAME` | _(empty / 空)_ | Name to track specially / 特别关注的人名 |
+| `SPECIAL_PERSON_LABEL` | `Special Person` | Display label for this person / 显示标签 |
 
 ### Enhanced Features / 增强功能
 
-| Variable | Default | Description |
+| Variable / 变量 | Default / 默认值 | Description / 说明 |
 |---|---|---|
-| `USE_ENHANCED_GATEWAY` | `true` | Enable enhanced gateway (diary, events, followup, emotion) |
-| `VOICE_AUTO_TRANSCRIBE` | `true` | Auto-transcribe voice messages |
-| `VOICE_TRANSCRIBE_MODEL` | `gemini-3-flash` | Model for voice transcription |
-| `SOUL_EVOLUTION_ENABLED` | `true` | Enable proactive soul personality evolution |
+| `USE_ENHANCED_GATEWAY` | `true` | Enable enhanced gateway (diary, events, followup, emotion) / 启用增强网关（日记、事件、跟进、情绪） |
+| `VOICE_AUTO_TRANSCRIBE` | `true` | Auto-transcribe voice messages / 自动转录语音消息 |
+| `VOICE_TRANSCRIBE_MODEL` | `gemini-3-flash` | Model for voice transcription / 语音转录模型 |
+| `SOUL_EVOLUTION_ENABLED` | `true` | Enable proactive soul personality evolution / 启用主动人格进化 |
 
 ---
 
